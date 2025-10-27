@@ -9,17 +9,17 @@ public class MainWindowController {
     private CategoryData categoryData;
     private MainWindow mainWindow;
 
-    private MainWindowController(MainWindowPanel mainWindowPanel, MainWindow mainWindow){
+    private MainWindowController(MainWindowPanel mainWindowPanel, MainWindow mainWindow, CategoryData categoryData){
         this.mainWindowPanel = mainWindowPanel;
         this.mainWindow = mainWindow;
-        this.categoryData = new CategoryData();
+        this.categoryData = categoryData;
         setupListeners();
         onSelectionListener(); // Updates the JComboBox to show the currentLeft of the startup category selected
     }
 
-    public static MainWindowController getInstance(MainWindowPanel mainWindowPanel, MainWindow mainWindow){
+    public static MainWindowController getInstance(MainWindowPanel mainWindowPanel, MainWindow mainWindow, CategoryData categoryData){
         if (instance == null){
-            instance = new MainWindowController(mainWindowPanel, mainWindow);
+            instance = new MainWindowController(mainWindowPanel, mainWindow, categoryData);
         }
         return instance;
     }

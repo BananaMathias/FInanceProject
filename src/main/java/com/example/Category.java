@@ -27,4 +27,12 @@ public class Category {
     public Budget getBudget(){
         return this.budget;
     }
+    public ArrayList<Transaction> getTransactions(){
+        return transactions;
+    }
+
+    @Override
+    public String toString(){
+        return type;
+    }
 }

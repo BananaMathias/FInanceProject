@@ -10,10 +10,12 @@ public class Launcher {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                CategoryData categoryData = new CategoryData();
                 MainWindowPanel mainWindowPanel = new MainWindowPanel();
-                TransactionsPanel transactionsPanel = new TransactionsPanel();
+                TransactionsPanel transactionsPanel = new TransactionsPanel(categoryData);
                 MainWindow main = new MainWindow(mainWindowPanel, transactionsPanel);
-                MainWindowController mainController = MainWindowController.getInstance(mainWindowPanel, main);
+
+                MainWindowController mainController = MainWindowController.getInstance(mainWindowPanel, main, categoryData);
                 main.show();
             }
         });

@@ -1,5 +1,7 @@
 package com.example;
 
+import javax.swing.*;
+
 public class Transaction {
 
     private int amount;
@@ -35,5 +37,10 @@ public class Transaction {
 
     public String getNote() {
         return note;
+    }
+
+    public JLabel getTransactionCard(){
+        String format = category + ", " + amount + ", " + note;
+        return new JLabel(format);
     }
 }

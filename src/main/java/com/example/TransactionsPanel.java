@@ -6,11 +6,15 @@ import java.awt.*;
 public class TransactionsPanel extends JPanel {
 
     JLabel info = new JLabel("All transactions are showed here");
+    CategoryData categoryData;
+    JScrollPane scrollPane;
 
-    public TransactionsPanel(){
+    public TransactionsPanel(CategoryData categoryData){
+        this.categoryData = categoryData;
         setLayout(new BorderLayout());
-        info.setFont(new Font("Roboto", 1, 21));
+        info.setFont(new Font("Roboto", Font.BOLD, 21));
         add(info);
+        createScrollPane();
     }
 
     @Override
@@ -22,5 +26,12 @@ public class TransactionsPanel extends JPanel {
         int stripeWidth = 4;              // thickness of stripe
         // Draw the vertical stripe
         g.fillRect(stripeX, 0, stripeWidth, getHeight());
+    }
+
+    private void createScrollPane(){
+        JPanel expensePanel = new ExpensePanel(categoryData, "Food");
+        scrollPane = new JScrollPane(expensePanel);
+        scrollPane.setMaximumSize(new Dimension(400, 400));
+        add(scrollPane, BorderLayout.CENTER);
     }
 }

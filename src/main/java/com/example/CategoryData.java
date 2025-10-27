@@ -27,4 +27,15 @@ public class CategoryData {
         return -1;
     }
 
+    public Category getCategory(String category){
+        for (Category value : categories) {
+            if (value.getType().equalsIgnoreCase(category)) {
+                System.out.println(value);
+                return value;
+            }
+        }
+        System.out.println("null");
+        return null;
+    }
+
 }
