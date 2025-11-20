@@ -2,6 +2,7 @@ package com.example;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MainWindowPanel extends JPanel {
 
@@ -9,24 +10,24 @@ public class MainWindowPanel extends JPanel {
     private JComboBox categoryOptions;
     private JLabel budgetLabel;
     private Budget[] budgets;
-    private String[] categories = {"Food", "Transportation", "Entertainment", "Personal"};// Needs data from CategoryData
+    //private String[] categories = {"Food", "Transportation", "Entertainment", "Personal"};// Needs data from CategoryData
     private JButton transactionButton;
 
     public MainWindowPanel(){
         //setLayout(new BorderLayout(50,50));
         setBackground(Color.GRAY);
         addCategoryLabel();
-        addComboBox();
         addBudgetLabel();
         addTranscationButton();
         //this.setSize(10,50);
     }
 
-    private void addComboBox(){
-        categoryOptions = new JComboBox(categories);
+    public JComboBox addComboBox(ArrayList<String> categories){
+        categoryOptions = new JComboBox(categories.toArray());
         //categoryOptions.setSelectedIndex(0);
         categoryOptions.setSize(100,200);
         this.add(categoryOptions);
+        return categoryOptions;
     }
 
     private void addCategoryLabel(){
@@ -56,8 +57,9 @@ public class MainWindowPanel extends JPanel {
     public JComboBox getCategoryOptions(){
         return categoryOptions;
     }
-    public String[] getCategories(){
-        return categories;
+
+    public void setCategoryOptions(JComboBox box){
+        categoryOptions = box;
     }
 
 }

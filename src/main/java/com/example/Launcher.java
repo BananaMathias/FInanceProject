@@ -14,8 +14,10 @@ public class Launcher {
                 MainWindowPanel mainWindowPanel = new MainWindowPanel();
                 TransactionsPanel transactionsPanel = new TransactionsPanel(categoryData);
                 MainWindow main = new MainWindow(mainWindowPanel, transactionsPanel);
+                TransactionsController transactionsController = new TransactionsController(transactionsPanel, main, categoryData);
+                MainWindowController mainController = MainWindowController.getInstance(mainWindowPanel, main, categoryData, transactionsController);
 
-                MainWindowController mainController = MainWindowController.getInstance(mainWindowPanel, main, categoryData);
+                mainController.addTransactionsObs(transactionsController);
                 main.show();
             }
         });

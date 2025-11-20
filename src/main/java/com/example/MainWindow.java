@@ -21,7 +21,7 @@ public class MainWindow {
     private JFrame createMainWindowFrame(){
         JFrame jFrame = new JFrame("FinanceTracker");
         jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        jFrame.setSize(1500, 800);
+        jFrame.setSize(1000, 600);
         jFrame.setResizable(false);
         jFrame.setLocationRelativeTo(null);
         //jFrame.setLayout(new BorderLayout());

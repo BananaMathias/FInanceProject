@@ -2,11 +2,12 @@ package com.example;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class TransactionDialog extends JDialog {
 
     JComboBox categoryOptions;
-    String[] categories;
+    ArrayList<String> categories;
     SpinnerNumberModel addAmountModel;
     JSpinner addAmountSpinner;
     JTextField note;
@@ -14,7 +15,7 @@ public class TransactionDialog extends JDialog {
     JComboBox typeOptions;
     JLabel info = new JLabel("Create a new transaction");
 
-    public TransactionDialog(String[] categories) {
+    public TransactionDialog(ArrayList<String> categories) {
         this.categories = categories;
         setSize(400, 500);
         info.setSize(300,60);
@@ -47,7 +48,7 @@ public class TransactionDialog extends JDialog {
     }
 
     private void addComboBox() {
-        categoryOptions = new JComboBox(categories);
+        categoryOptions = new JComboBox(categories.toArray());
         categoryOptions.setSelectedIndex(0);
         Dimension dimension = new Dimension(150,25);
         categoryOptions.setAlignmentX(Component.CENTER_ALIGNMENT);
