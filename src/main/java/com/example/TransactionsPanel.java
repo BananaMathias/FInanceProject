@@ -2,10 +2,10 @@ package com.example;
 
 import javax.swing.*;
 import java.awt.*;
-
+// Balance/transactions history, maybe tabs to switch between them on scrollpane
 public class TransactionsPanel extends JPanel {
 
-    JLabel info = new JLabel("All transactions are showed here");
+    //JLabel info = new JLabel("All transactions are showed here");
     CategoryData categoryData;
     JScrollPane scrollPane;
     ExpensePanel expensePanel;
@@ -13,10 +13,9 @@ public class TransactionsPanel extends JPanel {
     public TransactionsPanel(CategoryData categoryData){
         this.categoryData = categoryData;
         setLayout(new BorderLayout());
-        info.setFont(new Font("Roboto", Font.BOLD, 21));
-        add(info);
         add(new JLabel("Category:     Amount:    Description:"), BorderLayout.NORTH);
         createScrollPane();
+        add(new BudgetPanel(), BorderLayout.CENTER);
     }
 /*
     @Override

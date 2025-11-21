@@ -6,15 +6,15 @@ import java.util.Objects;
 public class MainWindowController {
 
     private static MainWindowController instance = null;
-    private MainWindowPanel mainWindowPanel;
+    private BudgetPanel budgetPanel;
     private CategoryData categoryData;
     private MainWindow mainWindow;
     private TransactionsController transactionsController;
     private ArrayList<TransactionsObserver> transactionsObservers = new ArrayList<TransactionsObserver>();
     private ArrayList<String> categories = new ArrayList<String>();
 
-    private MainWindowController(MainWindowPanel mainWindowPanel, MainWindow mainWindow, CategoryData categoryData, TransactionsController transactionsController){
-        this.mainWindowPanel = mainWindowPanel;
+    private MainWindowController(BudgetPanel budgetPanel, MainWindow mainWindow, CategoryData categoryData, TransactionsController transactionsController){
+        this.budgetPanel = budgetPanel;
         this.mainWindow = mainWindow;
         this.categoryData = categoryData;
         this.transactionsController = transactionsController;
@@ -24,7 +24,7 @@ public class MainWindowController {
             System.out.println(category.getType());
         }
 
-        mainWindowPanel.setCategoryOptions(mainWindowPanel.addComboBox(categories)); // Controller adds JComboBox to make categories available for other controllers such as TransactionsController
+        budgetPanel.setCategoryOptions(budgetPanel.addComboBox(categories)); // Controller adds JComboBox to make categories available for other controllers such as TransactionsController
         setupListeners();
         onSelectionListener(); // Updates the JComboBox to show the currentLeft of the startup category selected
 
@@ -34,26 +34,26 @@ public class MainWindowController {
         transactionsObservers.add(observer);
     }
 
-    public static MainWindowController getInstance(MainWindowPanel mainWindowPanel, MainWindow mainWindow, CategoryData categoryData, TransactionsController transactionsController){
+    public static MainWindowController getInstance(BudgetPanel budgetPanel, MainWindow mainWindow, CategoryData categoryData, TransactionsController transactionsController){
         if (instance == null){
-            instance = new MainWindowController(mainWindowPanel, mainWindow, categoryData, transactionsController);
+            instance = new MainWindowController(budgetPanel, mainWindow, categoryData, transactionsController);
         }
         return instance;
     }
 
     private void setupListeners(){
-        mainWindowPanel.getCategoryOptions().addActionListener(e -> onSelectionListener());
-        mainWindowPanel.getTransactionButton().addActionListener(e -> onTransactionClickListener());
+        budgetPanel.getCategoryOptions().addActionListener(e -> onSelectionListener());
+        budgetPanel.getTransactionButton().addActionListener(e -> onTransactionClickListener());
 
     }
 
     private void onSelectionListener(){
-        String selectedCategory = (String) mainWindowPanel.getCategoryOptions().getSelectedItem();
+        String selectedCategory = (String) budgetPanel.getCategoryOptions().getSelectedItem();
         selectedCategory.toUpperCase();
         transactionsController.setCurrentCategory(selectedCategory);
         double budgetToDisplay = categoryData.getBudget(selectedCategory);
-        mainWindowPanel.getBudgetLabel().setText(String.valueOf(budgetToDisplay));
-        //System.out.println(mainWindowPanel.getBudgetLabel().getText());
+        budgetPanel.getBudgetLabel().setText(String.valueOf(budgetToDisplay));
+        //System.out.println(budgetPanel.getBudgetLabel().getText());
     }
 
     private void onTransactionClickListener(){

@@ -7,13 +7,13 @@ import javax.swing.JFrame;
 public class MainWindow {
 
     private JTabbedPane tabbedPane;
-    private MainWindowPanel mainWindowPanel;
+    private BudgetPanel budgetPanel;
     private TransactionsPanel transactionsPanel;
     private final JFrame jFrame;
 
-    public MainWindow(MainWindowPanel mainWindowPanel, TransactionsPanel transactionsPanel){
+    public MainWindow(BudgetPanel budgetPanel, TransactionsPanel transactionsPanel){
         this.transactionsPanel = transactionsPanel;
-        this.mainWindowPanel = mainWindowPanel;
+        this.budgetPanel = budgetPanel;
         jFrame = createMainWindowFrame();
 
     }
@@ -25,14 +25,14 @@ public class MainWindow {
         jFrame.setResizable(false);
         jFrame.setLocationRelativeTo(null);
         //jFrame.setLayout(new BorderLayout());
-        //jFrame.add(mainWindowPanel, BorderLayout.NORTH);
+        //jFrame.add(budgetPanel, BorderLayout.NORTH);
         jFrame.add(createTabbedpane());
         return jFrame;
     }
 
     private JTabbedPane createTabbedpane(){
         tabbedPane = new JTabbedPane();
-        tabbedPane.add("Main page", this.mainWindowPanel);
+        tabbedPane.add("Main page", this.budgetPanel);
         tabbedPane.add("Transactions page", this.transactionsPanel);
         return tabbedPane;
     }

@@ -4,16 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class MainWindowPanel extends JPanel {
+public class BudgetPanel extends JPanel {
 
     private JLabel categoryLabel;
     private JComboBox categoryOptions;
     private JLabel budgetLabel;
-    private Budget[] budgets;
     //private String[] categories = {"Food", "Transportation", "Entertainment", "Personal"};// Needs data from CategoryData
     private JButton transactionButton;
 
-    public MainWindowPanel(){
+    public BudgetPanel(){
         //setLayout(new BorderLayout(50,50));
         setBackground(Color.GRAY);
         addCategoryLabel();
