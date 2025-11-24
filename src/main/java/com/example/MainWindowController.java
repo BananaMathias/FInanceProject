@@ -23,11 +23,12 @@ public class MainWindowController {
             categories.add(category.getType());
             System.out.println(category.getType());
         }
+        transactionsController.setCategories(categories);
 
         budgetPanel.setCategoryOptions(budgetPanel.addComboBox(categories)); // Controller adds JComboBox to make categories available for other controllers such as TransactionsController
         setupListeners();
         onSelectionListener(); // Updates the JComboBox to show the currentLeft of the startup category selected
-
+        transactionsController.updateCategories();
     }
 
     public void addTransactionsObs(TransactionsObserver observer){
@@ -49,7 +50,7 @@ public class MainWindowController {
 
     private void onSelectionListener(){
         String selectedCategory = (String) budgetPanel.getCategoryOptions().getSelectedItem();
-        selectedCategory.toUpperCase();
+        //selectedCategory.toUpperCase();
         transactionsController.setCurrentCategory(selectedCategory);
         double budgetToDisplay = categoryData.getBudget(selectedCategory);
         budgetPanel.getBudgetLabel().setText(String.valueOf(budgetToDisplay));

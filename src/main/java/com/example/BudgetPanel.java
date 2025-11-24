@@ -15,9 +15,7 @@ public class BudgetPanel extends JPanel {
     public BudgetPanel(){
         //setLayout(new BorderLayout(50,50));
         setBackground(Color.GRAY);
-        addCategoryLabel();
-        addBudgetLabel();
-        addTranscationButton();
+
         //this.setSize(10,50);
     }
 
@@ -25,7 +23,11 @@ public class BudgetPanel extends JPanel {
         categoryOptions = new JComboBox(categories.toArray());
         //categoryOptions.setSelectedIndex(0);
         categoryOptions.setSize(100,200);
+        addCategoryLabel();
         this.add(categoryOptions);
+        addBudgetLabel();
+        addTranscationButton();
+
         return categoryOptions;
     }
 

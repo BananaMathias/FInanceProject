@@ -6,16 +6,18 @@ import java.awt.*;
 public class TransactionsPanel extends JPanel {
 
     //JLabel info = new JLabel("All transactions are showed here");
-    CategoryData categoryData;
-    JScrollPane scrollPane;
-    ExpensePanel expensePanel;
+    private CategoryData categoryData;
+    private JScrollPane scrollPane;
+    private ExpensePanel expensePanel;
+    private BudgetPanel budgetPanel;
 
     public TransactionsPanel(CategoryData categoryData){
         this.categoryData = categoryData;
         setLayout(new BorderLayout());
+        budgetPanel = new BudgetPanel();
         add(new JLabel("Category:     Amount:    Description:"), BorderLayout.NORTH);
         createScrollPane();
-        add(new BudgetPanel(), BorderLayout.CENTER);
+        add(budgetPanel, BorderLayout.CENTER);
     }
 /*
     @Override
@@ -39,5 +41,13 @@ public class TransactionsPanel extends JPanel {
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         add(scrollPane, BorderLayout.WEST);
+    }
+
+    public ExpensePanel getExpensePanel(){
+        return expensePanel;
+    }
+
+    public BudgetPanel getBudgetPanel(){
+        return budgetPanel;
     }
 }

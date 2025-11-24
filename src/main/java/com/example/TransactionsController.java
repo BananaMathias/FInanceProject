@@ -6,7 +6,6 @@ public class TransactionsController implements TransactionsObserver {
 
     private TransactionsPanel transactionsPanel;
     private MainWindow mainWindow;
-    private MainWindowController mainWindowController;
     private CategoryData categoryData;
     private ExpensePanel expensePanel;
     private ArrayList<String> categories = new ArrayList<String>();
@@ -20,8 +19,11 @@ public class TransactionsController implements TransactionsObserver {
         this.transactionsPanel = transactionsPanel;
         this.mainWindow = mainWindow;
         this.categoryData = categoryData;
-        expensePanel = transactionsPanel.expensePanel;
+        expensePanel = transactionsPanel.getExpensePanel();
         updateTransactions();
+        transactionsPanel.getBudgetPanel().addComboBox(categories);
+        updateCategories();
+        setupListeners();
     }
 
     public void updateTransactions() {
@@ -30,6 +32,18 @@ public class TransactionsController implements TransactionsObserver {
             System.out.println(transaction.getAmount());
             expensePanel.add(transaction.getTransactionCard());
         }
+    }
+
+    private void setupListeners(){
+        transactionsPanel.getBudgetPanel().getCategoryOptions().addActionListener(e -> onSelectionListener());
+    }
+
+    private void onSelectionListener(){
+        String selectedCategory = (String) transactionsPanel.getBudgetPanel().getCategoryOptions().getSelectedItem();
+        double budgetToDisplay = categoryData.getBudget(selectedCategory);
+        transactionsPanel.getBudgetPanel().getBudgetLabel().setText(String.valueOf(budgetToDisplay));
+        currentCategory = selectedCategory;
+        updateTransactions();
     }
 
     public void setCategories(ArrayList<String> array){
@@ -41,4 +55,11 @@ public class TransactionsController implements TransactionsObserver {
             currentCategory = category;
         }
     }
+
+    public void updateCategories(){
+        for (String category: categories){
+            transactionsPanel.getBudgetPanel().getCategoryOptions().addItem(category);
+        }
+    }
+
 }
