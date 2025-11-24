@@ -34,7 +34,7 @@ public class TransactionsPanel extends JPanel {
 
 
     private void createScrollPane(){
-        expensePanel = new ExpensePanel(categoryData, "Food");
+        expensePanel = new ExpensePanel("Food");
         scrollPane = new JScrollPane(expensePanel);
         scrollPane.setMaximumSize(new Dimension(100, 100));
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);

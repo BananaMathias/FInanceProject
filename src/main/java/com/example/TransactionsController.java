@@ -1,6 +1,7 @@
 package com.example;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class TransactionsController implements TransactionsObserver {
 
@@ -28,7 +29,7 @@ public class TransactionsController implements TransactionsObserver {
 
     public void updateTransactions() {
         expensePanel.removeAll();
-        for (Transaction transaction : categoryData.getCategory(expensePanel.currentCategory).getTransactions()) {
+        for (Transaction transaction : categoryData.getCategory(expensePanel.getCurrentCategory()).getTransactions()) {
             System.out.println(transaction.getAmount());
             expensePanel.add(transaction.getTransactionCard());
         }
@@ -36,6 +37,30 @@ public class TransactionsController implements TransactionsObserver {
 
     private void setupListeners(){
         transactionsPanel.getBudgetPanel().getCategoryOptions().addActionListener(e -> onSelectionListener());
+        transactionsPanel.getBudgetPanel().getTransactionButton().addActionListener(e -> onTransactionsClickListener());
+    }
+
+    private void onTransactionsClickListener(){
+        TransactionDialog transactionDialog = new TransactionDialog(categories);
+        transactionDialog.getSubmitButton().addActionListener(e -> onSubmitListener(transactionDialog));
+
+        transactionDialog.setModal(true);
+        transactionDialog.setVisible(true);
+    }
+
+    private void onSubmitListener(TransactionDialog dialog){
+        int amount = (int) dialog.getAddAmountSpinner().getValue();
+        String category = (String) dialog.getCategoryOptions().getSelectedItem();
+        String note = dialog.getNote().getText();
+        String type = (String) dialog.getTypeOptions().getSelectedItem();
+
+        Transaction transaction = new Transaction(amount, note, category, type);
+        if (getCategory(category) != null){
+            getCategory(category).addTransaction(transaction);
+        }
+        //System.out.println(transaction.toString());
+        dialog.dispose();
+        onSelectionListener(); // Update the JComboBox to show the updated currentLeft in the categories to update the currently selected category
     }
 
     private void onSelectionListener(){
@@ -43,6 +68,7 @@ public class TransactionsController implements TransactionsObserver {
         double budgetToDisplay = categoryData.getBudget(selectedCategory);
         transactionsPanel.getBudgetPanel().getBudgetLabel().setText(String.valueOf(budgetToDisplay));
         currentCategory = selectedCategory;
+        expensePanel.setCurrentCategory(currentCategory);
         updateTransactions();
     }
 
@@ -54,6 +80,16 @@ public class TransactionsController implements TransactionsObserver {
         if (category != null){
             currentCategory = category;
         }
+    }
+
+    private Category getCategory(String type){
+
+        for (int i = 0; i < categoryData.getCategories().toArray().length; i++){
+            if (Objects.equals(categoryData.getCategories().get(i).getType(), type)){
+                return categoryData.getCategories().get(i);
+            }
+        }
+        return null;
     }
 
     public void updateCategories(){
