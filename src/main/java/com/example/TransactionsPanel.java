@@ -17,7 +17,7 @@ public class TransactionsPanel extends JPanel {
         budgetPanel = new BudgetPanel();
         add(new JLabel("Category:     Amount:    Description:"), BorderLayout.NORTH);
         createScrollPane();
-        add(budgetPanel, BorderLayout.CENTER);
+        add(budgetPanel, BorderLayout.EAST);
     }
 /*
     @Override

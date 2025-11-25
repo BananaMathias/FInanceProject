@@ -7,13 +7,13 @@ import javax.swing.JFrame;
 public class MainWindow {
 
     private JTabbedPane tabbedPane;
-    private BudgetPanel budgetPanel;
+    private MainWindowPanel mainWindowPanel;
     private TransactionsPanel transactionsPanel;
     private final JFrame jFrame;
 
-    public MainWindow(BudgetPanel budgetPanel, TransactionsPanel transactionsPanel){
+    public MainWindow(MainWindowPanel mainWindowPanel, TransactionsPanel transactionsPanel){
         this.transactionsPanel = transactionsPanel;
-        this.budgetPanel = budgetPanel;
+        this.mainWindowPanel = mainWindowPanel;
         jFrame = createMainWindowFrame();
 
     }
@@ -32,7 +32,7 @@ public class MainWindow {
 
     private JTabbedPane createTabbedpane(){
         tabbedPane = new JTabbedPane();
-        tabbedPane.add("Main page", this.budgetPanel);
+        tabbedPane.add("Main page", this.mainWindowPanel);
         tabbedPane.add("Transactions page", this.transactionsPanel);
         return tabbedPane;
     }

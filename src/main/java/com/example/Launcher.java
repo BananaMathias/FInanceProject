@@ -11,11 +11,11 @@ public class Launcher {
             @Override
             public void run() {
                 CategoryData categoryData = new CategoryData();
-                BudgetPanel budgetPanel = new BudgetPanel();
+                MainWindowPanel mainWindowPanel= new MainWindowPanel();
                 TransactionsPanel transactionsPanel = new TransactionsPanel(categoryData);
-                MainWindow main = new MainWindow(budgetPanel, transactionsPanel);
+                MainWindow main = new MainWindow(mainWindowPanel, transactionsPanel);
                 TransactionsController transactionsController = new TransactionsController(transactionsPanel, main, categoryData);
-                MainWindowController mainController = MainWindowController.getInstance(budgetPanel, main, categoryData, transactionsController);
+                MainWindowController mainController = MainWindowController.getInstance(mainWindowPanel, main, categoryData, transactionsController);
 
                 mainController.addTransactionsObs(transactionsController);
                 main.show();
